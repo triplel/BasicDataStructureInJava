@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,5 +57,11 @@ public class SimpleHashMapTest {
 
         assertEquals(simpleHashMap.get(str1),Integer.valueOf(100));
         assertEquals(simpleHashMap.get(str2),Integer.valueOf(200));
+    }
+
+    @Test
+    public void testSimpleHashMapNullValueAllowed(){
+        simpleHashMap.put("Unknown FC", null);
+        assertNull(simpleHashMap.get("Unknown FC"));
     }
 }
