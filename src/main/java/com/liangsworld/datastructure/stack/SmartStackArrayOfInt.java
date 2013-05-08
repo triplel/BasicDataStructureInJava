@@ -87,10 +87,7 @@ public class SmartStackArrayOfInt {
     }
 
     private Tracker popTrackTop(){
-//        int i = (int) trackMin[--trackIndex];
-//        trackMin[trackIndex] = null;
-//        return i;
-        Tracker t = (Tracker) trackMin[--trackIndex];
+        Tracker t = trackMin[--trackIndex];
         trackMin[trackIndex] = null;
         return t;
 
