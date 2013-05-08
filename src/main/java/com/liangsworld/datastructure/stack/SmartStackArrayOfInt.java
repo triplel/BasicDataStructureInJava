@@ -10,15 +10,27 @@ import java.util.Arrays;
  * To change this template use File | Settings | File Templates.
  */
 public class SmartStackArrayOfInt {
+
+    private static class Tracker{
+        int max;
+        int min;
+
+        Tracker(int max, int min){
+            this.max=max;
+            this.min=min;
+        }
+    }
+
     private int stackIndex = 0;
     private int trackIndex = 0;
     private static final int DEFAULT_SIZE = 20;
     private Integer elements[];
-    private Integer trackMin[];
+    private Tracker trackMin[];
+
 
     public SmartStackArrayOfInt(){
         elements = new Integer[DEFAULT_SIZE];
-        trackMin = new Integer[DEFAULT_SIZE];
+        trackMin = new Tracker[DEFAULT_SIZE];
     }
 
     public void push(int i){
@@ -26,18 +38,22 @@ public class SmartStackArrayOfInt {
             ensureElementsCapacity();
         }
         elements[stackIndex++] = i;
-        pushTrackMin(i);
+        pushTracker(i);
     }
 
     public int pop(){
         int e = (int) elements[--stackIndex];
         elements[stackIndex] = null;
-        popTrackMin();
+        popTrackTop();
         return e;
     }
 
     public int getCurrentMin(){
-        return trackMin[trackIndex-1];
+        return trackMin[trackIndex-1].min;
+    }
+
+    public int getCurrentMax(){
+        return trackMin[trackIndex-1].max;
     }
     private void ensureElementsCapacity(){
         int newSize = elements.length * 2;
@@ -49,25 +65,34 @@ public class SmartStackArrayOfInt {
         elements = Arrays.copyOf(elements, newSize);
     }
 
-    private void pushTrackMin(Integer i){
+    private void pushTracker(Integer i){
         if (trackIndex == trackMin.length){
             ensureTrackMinCapacity();
         }
         if(trackIndex == 0){
-            trackMin[trackIndex++] = i;
+            trackMin[trackIndex++] = new Tracker(i, i);
         }else{
-            int min = trackMin[trackIndex-1];
+            int min = trackMin[trackIndex-1].min;
+            int max = trackMin[trackIndex-1].max;
+            Tracker t;
             if(min >= i){
-                trackMin[trackIndex++] = i;
+                t = new Tracker(max, i);
+            }else if( (i > min) && (i <= max)){
+                t = new Tracker(max, min);
             }else{
-                trackMin[trackIndex++] = min;
+                t = new Tracker(i, min);
             }
+                trackMin[trackIndex++] = t;
         }
     }
 
-    private int popTrackMin(){
-        int i = (int) trackMin[--trackIndex];
+    private Tracker popTrackTop(){
+//        int i = (int) trackMin[--trackIndex];
+//        trackMin[trackIndex] = null;
+//        return i;
+        Tracker t = (Tracker) trackMin[--trackIndex];
         trackMin[trackIndex] = null;
-        return i;
+        return t;
+
     }
 }

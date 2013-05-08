@@ -72,14 +72,31 @@ public class StackTest {
         stack.push(6);
         stack.push(7);
         assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==7);
         stack.push(1);
         assertTrue(stack.getCurrentMin()==1);
         assertTrue(stack.pop() == 1);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==7);
+
         assertTrue(stack.pop() == 7);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==6);
+
         assertTrue(stack.pop() == 6);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==5);
+
         assertTrue(stack.pop() == 5);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==4);
+
         assertTrue(stack.pop() == 4);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==3);
+
         assertTrue(stack.pop() == 3);
-        assertTrue(stack.pop() == 2);
+        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMax()==2);
     }
 }
