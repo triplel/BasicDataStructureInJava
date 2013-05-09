@@ -3,6 +3,8 @@ package com.liangsworld.datastructure.stack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Vector;
+
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -71,10 +73,13 @@ public class StackTest {
         stack.push(5);
         stack.push(6);
         stack.push(7);
-        assertTrue(stack.getCurrentMin()==2);
+        assertTrue(stack.getCurrentMin() == 2);
         assertTrue(stack.getCurrentMax()==7);
+
         stack.push(1);
         assertTrue(stack.getCurrentMin()==1);
+        assertTrue(stack.getCurrentMax()==7);
+
         assertTrue(stack.pop() == 1);
         assertTrue(stack.getCurrentMin()==2);
         assertTrue(stack.getCurrentMax()==7);

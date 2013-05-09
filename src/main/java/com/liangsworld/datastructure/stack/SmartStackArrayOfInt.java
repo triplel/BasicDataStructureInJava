@@ -27,7 +27,6 @@ public class SmartStackArrayOfInt {
     private Integer elements[];
     private Tracker trackMin[];
 
-
     public SmartStackArrayOfInt(){
         elements = new Integer[DEFAULT_SIZE];
         trackMin = new Tracker[DEFAULT_SIZE];
@@ -90,6 +89,5 @@ public class SmartStackArrayOfInt {
         Tracker t = trackMin[--trackIndex];
         trackMin[trackIndex] = null;
         return t;
-
     }
 }

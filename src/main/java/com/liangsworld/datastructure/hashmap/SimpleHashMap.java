@@ -40,7 +40,6 @@ public class SimpleHashMap<K,V> {
                     entry.setNext(new MyEntry<K, V>(key,value));
                     done = true;
                 }
-//                entry = entry.getNext();
             }
         } else {
             buckets[bucketIndex] = new MyEntry<K, V>(key, value);
